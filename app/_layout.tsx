@@ -1,24 +1,32 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
+import { queryClient } from "@/service/queryClient";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { useFonts } from "expo-font";
+import { Stack } from "expo-router";
+import "../global.css";
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
+  useFonts({
+    Okra: require("../assets/fonts/Okra-Regular.ttf"),
+    "Okra-Bold": require("../assets/fonts/Okra-Bold.ttf"),
+    "Okra-ExtraBold": require("../assets/fonts/Okra-ExtraBold.ttf"),
+    "Okra-Medium": require("../assets/fonts/Okra-Medium.ttf"),
+    "Okra-MediumLight": require("../assets/fonts/Okra-MediumLight.ttf"),
+  });
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
+    <QueryClientProvider client={queryClient}>
+      <Stack
+        initialRouteName="index"
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="index" />
+        <Stack.Screen name="login" />
+        <Stack.Screen name="home" />  z
+        <Stack.Screen name="bus-list" />  z
+        <Stack.Screen name="select-seat" />  z
       </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    </QueryClientProvider>
   );
 }
