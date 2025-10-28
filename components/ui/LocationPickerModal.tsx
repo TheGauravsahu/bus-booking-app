@@ -61,7 +61,7 @@ export default function LocationPickerModal({
               }}
             >
               <Text
-                className={`text-md ${
+                className={`text-md font-okra ${
                   item === fromLocation ? "text-gray-400" : "text-black"
                 }`}
               >

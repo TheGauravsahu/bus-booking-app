@@ -14,7 +14,7 @@ class TicketRequests {
   }: {
     busId: string;
     date: string;
-    seatNumbers: string;
+    seatNumbers: number[];
   }) => {
     const { data } = await apiClient.post("/tickets/book", {
       busId,

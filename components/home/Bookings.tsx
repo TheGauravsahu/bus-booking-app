@@ -106,7 +106,9 @@ export default function Bookings() {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
-        renderItem={({ item }) => <BookItem item={item} />}
+        renderItem={({ item }) => <View className="flex-col flex-1 gap-4 w-full mt-4">
+          <BookItem item={item} />
+        </View>}
       />
     </View>
   );

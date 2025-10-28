@@ -41,7 +41,7 @@ export default function BusList() {
           source={require("../assets/images/sidebus.png")}
         />
 
-        <Text className="text-lg font-okra font-bold text-gray-900">
+        <Text className="text-lg font-okra-bold text-gray-900">
           {item.company}
         </Text>
         <Text className="text-sm font-okra text-gray-500">{item.busType}</Text>

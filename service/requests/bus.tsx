@@ -15,7 +15,7 @@ class BusRequests {
     return data?.data || [];
   };
 
-  fetchBusDetails = async (busId: string) => {
+  fetchBusDetails = async (busId: string): Promise<IBus> => {
     const { data } = await apiClient.get(`/buses/${busId}`);
     return data?.data;
   };

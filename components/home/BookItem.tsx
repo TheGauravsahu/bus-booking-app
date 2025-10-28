@@ -8,13 +8,17 @@ export default function BookItem({ item }: { item: ITicket }) {
   const [ticketVisible, setTicketVisible] = useState(false);
 
   return (
-    <View className="bg-gray-100 p-4 rounded-lg mb-3">
-      <View className="flex-row justify-between">
-        <Image
-          source={require("../../assets/images/sidebus.png")}
-          style={{ width: 12, height: 12 }}
-        />
-        <Text className="text-gray-500">{item.status}</Text>
+    <View className="bg-gray-100 p-4 rounded-[20px] shadow-sm mb-3">
+      <View className="flex-row justify-between mb-2">
+        <View className="flex-row gap-2 items-center">
+          <Image
+            source={require("../../assets/images/sidebus.png")}
+            style={{ width: 12, height: 12 }}
+            className=""
+          />
+          <Text className="text-gray-500">{item.status}</Text>
+        </View>
+
         <Text className="text-lg text-bold">
           {item.bus.from} → {item.bus.to}
         </Text>
@@ -46,7 +50,7 @@ export default function BookItem({ item }: { item: ITicket }) {
       {ticketVisible && (
         <TicketModal
           visible={ticketVisible}
-          onClose={() => setTicketVisible(true)}
+          onClose={() => setTicketVisible(false)}
           bookingInfo={item}
         />
       )}

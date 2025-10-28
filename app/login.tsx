@@ -21,11 +21,12 @@ export default function LoginScreen() {
 
   const loginMuatation = useMutation({
     mutationFn: () => authReq.loginOrSignUp({ email, password }),
-    onSuccess: () => {
+    onSuccess: (res) => {
       router.push("/home");
     },
-    onError: (err) => {
+    onError: (err: any) => {
       console.log("error logging in user", err);
+      Alert.alert(`Error logging: ${err.response.data.error}`);
     },
   });
 
@@ -67,7 +68,7 @@ export default function LoginScreen() {
               onChangeText={setPassword}
             />
             <TouchableOpacity
-              onPress={()=>setShowPassword(!showPassword)}
+              onPress={() => setShowPassword(!showPassword)}
               activeOpacity={0.8}
               hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
             >

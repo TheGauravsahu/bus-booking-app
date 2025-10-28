@@ -27,18 +27,25 @@ export default function TicketModal({
           <XMarkIcon color="black" size={22} />
         </TouchableOpacity>
         <View className="bg-white relative overflow-hidden rounded-xl w-[90%] p-4 shadow-lg">
-          <Text className="text-center text-lg font-bold mb-2">
+          <Text className="text-center text-lg font-okra-bold mb-2">
             Your Ticket
           </Text>
-          <View className="absolute border-t border-dotted left-[-14px] top-[60%] -translate-y-2"></View>
 
           <View className="bg-gray-100 p-2 rounded-lg">
             <Text className="text-gray-700 font-semibold">
               {bookingInfo.bus.to} → {bookingInfo.bus.from}
             </Text>
             <Text className="text-gray-500 text-sm">
-              {bookingInfo.bus.departureTime} - {bookingInfo.bus.arrivalTime},{" "}
-              {bookingInfo.date}
+              {new Date(bookingInfo.bus.departureTime).toLocaleDateString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}{" "}
+              -{" "}
+              {new Date(bookingInfo.bus.arrivalTime).toLocaleDateString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+              , {new Date(bookingInfo.date).toLocaleDateString()}
             </Text>
           </View>
 
