@@ -1,6 +1,6 @@
 import { ITicket } from "@/types";
 import React from "react";
-import { Modal, Text, TouchableOpacity, View } from "react-native";
+import { Modal, Share, Text, TouchableOpacity, View } from "react-native";
 import { ArrowUpOnSquareIcon, XMarkIcon } from "react-native-heroicons/solid";
 
 interface TicketModalProps {
@@ -14,6 +14,29 @@ export default function TicketModal({
   onClose,
   bookingInfo,
 }: TicketModalProps) {
+  const handleShare = async () => {
+    try {
+      const message = [
+        "🎟️ Bus Ticket Details",
+        "",
+        `🚌 Bus: ${bookingInfo.bus.company} (${bookingInfo.bus.busType})`,
+        `📍 Route: ${bookingInfo.bus.from} → ${bookingInfo.bus.to}`,
+        `📅 Date: ${new Date(bookingInfo.date).toLocaleDateString()}`,
+        `💺 Seats: ${bookingInfo.seatNumbers.join(", ")}`,
+        `💰 Fare: ₹${bookingInfo.total_fare}`,
+        `🆔 PNR: ${bookingInfo.pnr}`,
+        "",
+        "Download our app to manage your bookings!",
+      ].join("\n");
+      await Share.share({
+        title: "Your Bus Ticket",
+        message,
+      });
+    } catch (error) {
+      console.log("Error sharing ticket:", error);
+    }
+  };
+
   return (
     <Modal animationType="slide" visible={visible} transparent>
       <View
@@ -72,7 +95,10 @@ export default function TicketModal({
           </View>
         </View>
 
-        <TouchableOpacity className="bg-red-500 flex-row gap-2 p-3 rounded-lg mt-4 jsutify-center items-center">
+        <TouchableOpacity
+          onPress={handleShare}
+          className="bg-red-500 flex-row gap-2 p-3 rounded-lg mt-4 jsutify-center items-center"
+        >
           <ArrowUpOnSquareIcon color="white" />
           <Text className="text-white font-semibold">Share your ticket</Text>
         </TouchableOpacity>
